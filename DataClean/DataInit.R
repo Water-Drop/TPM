@@ -1,0 +1,5 @@
+songs_data <- read.csv("Data/mars_tianchi_songs.csv")
+colnames(songs_data) <- c("song_id","artist_id","publish_time","song_init_plays","Language","Gender")
+user_actions <- read.csv("Data/mars_tianchi_user_actions.csv")
+colnames(user_actions) <- c("user_id","song_id","gmt_create","action_type","Ds")
+user_actions$gmt_create_time <- as.POSIXct(user_actions$gmt_create, origin="1970-01-01")
