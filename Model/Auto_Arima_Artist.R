@@ -3,10 +3,10 @@ library("forecast")
 Artist_Auto_Arima <- function(artist_play_data){
   ts_data <- ts(artist_play_data[,"x"])
   arimal <- auto.arima(ts_data, trace=T)
-  forecast_result <- forecast(arimal,h=60,fan=T)
+  forecast_result <- forecast(arimal,h=61,fan=T)
   rtn.result <- NULL
-  for (i in 1:60){
-    artist.result <- data.frame("artist_id"=artist_play_data[1,"artist_id"],"Plays"=forecast_result$mean[i],"Ds"=as.character(as.Date("20150831","%Y%m%d")+i,"%Y%m%d"))
+  for (i in 2:61){
+    artist.result <- data.frame("artist_id"=artist_play_data[1,"artist_id"],"Plays"=forecast_result$mean[i],"Ds"=as.character(as.Date("20150830","%Y%m%d")+i,"%Y%m%d"))
     rtn.result <- rbind(rtn.result, artist.result)
   }
   return(rtn.result)
@@ -21,5 +21,5 @@ submission_data <- NULL
 for (i in 1:length(result.list)){
   submission_data <- rbind(submission_data, result.list[[i]])
 }
-write.table(submission_data, "submission_aar_tj_20160519.csv", sep=",", col.names=F, row.names=F, quote=F)
+write.table(submission_data, "submission_aar_tj_20160529.csv", sep=",", col.names=F, row.names=F, quote=F)
 
